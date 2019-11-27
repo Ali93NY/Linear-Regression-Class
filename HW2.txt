@@ -1,0 +1,35 @@
+To get the data of the 120 students for question 1.19
+data = read.table("http://users.stat.ufl.edu/~rrandles/sta4210/Rclassnotes/data/textdatasets/KutnerData/Chapter%20%201%20Data%20Sets/CH01PR19.txt", header = FALSE)
+# To name both columns Y = GPA, X = SAT
+names(data)[1] = paste("y")
+names(data)[2] = paste("x")
+# To see the data
+data
+attach(data)
+
+
+reg = lm(y~x)
+summary(reg)
+# beta_0 = 2.11405, beta_1 = 0.03883
+# the estimate regression function Y = 2.11405 + 0.03883 X
+
+# 2.4 problem p. 90
+# Answering a
+confint(reg,level=0.99)
+# The confidence interval for Beta1 at 99% are 0.00538 and 0.07226
+# The Confidence interval does not include Zero.
+# If the confidence interval includes zero, then Beta1 can be zero.
+
+# Answering b
+# Ho : Beta1 = 0 
+# Ha : Beta1 does not equal 0
+summary(reg)$coefficients
+# the t value is 3.0397
+qt(0.995,118)
+# the critical value is 2.6181
+# since 3.0397 > 2.6181, the Ho is rejected
+# therefore, Beta1 does not equal 0
+
+# Answering C
+# the p-value is 0.0029
+# since 0.0029 < 0.01, we reject Ho and conclude Beta1 does not equal 0
